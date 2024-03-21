@@ -31,13 +31,24 @@ const data = [
     }
 ]
 
-app.get("/", (request, response) => {
-    response.json(data)
-})
-
 app.get("/info", (request, response) => {
     response.contentType("html")
     response.send(`Phonebook has info for ${data.length} people.<br />${Date()}`)
+})
+
+app.get("/api/persons", (request, response) => {
+    response.json(data)
+})
+
+app.get("/api/persons/:id", (request, response) => {
+    const id = Number(request.params.id);
+    const person = data.find(p => p.id === id)
+
+    if (person) {
+        response.json(person)
+    } else {
+        response.status(404).end()
+    }
 })
 
 const PORT = 3001
