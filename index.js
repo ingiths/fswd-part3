@@ -31,6 +31,11 @@ let data = [
     }
 ]
 
+const generateId = () => {
+    const maxId = data.length > 0 ? Math.max(...data.map(p => p.id)) : 0
+    return maxId + 1
+}
+
 app.get("/info", (request, response) => {
     response.contentType("html")
     response.send(`Phonebook has info for ${data.length} people.<br />${Date()}`)
@@ -55,6 +60,26 @@ app.delete("/api/persons/:id", (request, response) => {
     const id = Number(request.params.id);
     data = data.filter(p => p.id !== id)
     response.status(204).end()
+})
+
+app.post("/api/persons", (request, response) => {
+    const body = request.body
+
+    if (!body.name || !body.number) {
+        return response.status(400).json({
+            error: "body missing required data"
+        });
+    }
+
+    const person = {
+        id: generateId(),
+        name: body.name,
+        number: body.number,
+    };
+
+    data = data.concat(person)
+
+    response.json(person)
 })
 
 const PORT = 3001
