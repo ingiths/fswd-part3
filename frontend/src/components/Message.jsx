@@ -4,7 +4,6 @@ const Message = ({ message }) => {
   }
 
   const { success, content } = message;
-  console.log(success, content)
 
   const successStyle = {
     color: "green",

@@ -63,7 +63,7 @@ const App = () => {
         .catch((error) => {
           setMessage({
             success: false,
-            content: `Information of ${newPerson.name} has already been removed from the server`,
+            content: error.response.data.error,
           });
           setTimeout(() => setMessage(null), 5000);
         });
@@ -84,7 +84,7 @@ const App = () => {
         .catch((error) => {
           setMessage({
             success: false,
-            content: `Failed to created ${returnedPerson.name}`,
+            content: error.response.data.error,
           });
           setTimeout(() => setMessage(null), 5000);
         });
