@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require("express");
 const morgan = require("morgan");
 const Person = require('./models/person');
-const { ObjectId } = require('bson');
 
 morgan.token("body", function (req, res) {
     return JSON.stringify(req.body)
