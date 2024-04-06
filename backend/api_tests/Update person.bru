@@ -1,11 +1,11 @@
 meta {
-  name: Create person
+  name: Update person
   type: http
-  seq: 5
+  seq: 6
 }
 
-post {
-  url: {{baseUrl}}/api/persons
+put {
+  url: {{baseUrl}}/api/persons/66116084f70ab2571c31e8f6
   body: json
   auth: none
 }
